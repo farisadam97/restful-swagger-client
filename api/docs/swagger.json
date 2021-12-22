@@ -32,6 +32,36 @@
         "produces": [
           "application/json"
         ],
+        "parameters":[
+          {
+            "in": "query",
+            "name": "username",
+            "schema":{
+              "type": "string"
+              }
+          },
+          {
+            "in": "query",
+            "name": "email",
+            "schema":{
+              "type": "string"
+              }
+          },
+          {
+            "in": "query",
+            "name": "experience",
+            "schema":{
+              "type": "integer"
+              }
+          },
+          {
+            "in": "query",
+            "name": "lvl",
+            "schema":{
+              "type": "integer"
+              }
+          }
+        ],
         "responses": {
           "200":{
             "description": "successful operation",
@@ -344,7 +374,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "experience to update",
             "description": "Player exp to update",
             "required": true,
             "schema": {
@@ -380,7 +410,7 @@
                 },
                 "message":{
                   "type":"string",
-                  "example": "Cannot update Player with id=${id}!"
+                  "example": "Cannot update Player with id=2!"
                 }
               }
             }
@@ -435,8 +465,8 @@
       ],
       "properties": {
         "exp": {
-          "type": "string",
-          "example": "test"
+          "type": "integer",
+          "example": 2
         }
       }
     },
@@ -485,6 +515,32 @@
               "example":"2021-12-11T06:55:43.042Z"
             }
           }
+        }
+      }
+    },
+    "responseExp400ExpFieldEmpty":{
+      "type": "object",
+      "properties":{  
+        "result":{
+          "type": "string",
+          "example": "FAILED"
+        },
+        "message":{
+          "type":"string",
+          "example": "exp field cannot be empty."
+        }
+      }
+    },
+    "responseExp400Error":{
+      "type": "object",
+      "properties":{  
+        "result":{
+          "type": "string",
+          "example": "FAILED"
+        },
+        "message":{
+          "type":"string",
+          "example": "Cannot update Player with id=2!"
         }
       }
     }
