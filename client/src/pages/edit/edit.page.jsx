@@ -1,38 +1,17 @@
-import { useState } from "react";
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import {useParams} from 'react-router-dom'
 
 
+const Edit = (props) => {
 
-const Edit = () => {
-    const [data,setData] = useState({
-        username : '',
-        email : '',
-        password : '',
-    })
+    let idUserParams = useParams()
+    let indexUser = props.user.findIndex((obj => obj.id === parseInt(idUserParams.idUser)))
+    let dataUser = props.user[indexUser]
     
-    const [tmpData,setTmpData] = useState({
-        username : '',
-        email : '',
-        password : '',
-    })
-    
-    const submitData = () => {
-        setData({
-            username : tmpData.username,
-            email : tmpData.email,
-            password : tmpData.password,
-        })
-        
-        setTmpData({
-            username : '',
-            email : '',
-            password : '',
-        })
-    }
     return (
         <Box sx={{
             width:'50vw',
@@ -49,36 +28,32 @@ const Edit = () => {
                 mx:'auto'
             }}>
                 <TextField sx={{mb:"16px"}} id="username" fullWidth label="Username" variant="outlined"
-                onChange={(e)=>setTmpData({
-                    ...tmpData,
-                    username: e.target.value
-                })}
-                value={tmpData.username}
+                defaultValue={dataUser.username}
+                onChange={(e)=>
+                    {
+                        props.setTmpUser({
+                            ...props.tmpUser,
+                            username: e.target.value
+                        })
+                    }
+                }
                 />
                 <TextField sx={{mb:"16px"}} id="email" fullWidth label="Email" variant="outlined"
-                onChange={(e)=>setTmpData({
-                    ...tmpData,
+                onChange={(e)=>props.setTmpUser({
+                    ...props.tmpUser,
                     email: e.target.value
                 })}
-                value={tmpData.email}
+                defaultValue={dataUser.email}
                 />
-                <TextField sx={{mb:"16px"}} id="password" fullWidth label="Password" variant="outlined" type="password" 
-                onChange={(e)=>setTmpData({
-                    ...tmpData,
+                <TextField sx={{mb:"16px"}} id="password" fullWidth label="Password" variant="outlined"  
+                onChange={(e)=>props.setTmpUser({
+                    ...props.tmpUser,
                     password: e.target.value
                 })}
-                value={tmpData.password}
+                defaultValue={dataUser.password}
                 />
-                <Button variant="contained" fullWidth onClick={submitData}>Submit</Button>
-                {Object.entries(data).map(([key,value]) => {
-                    return( {value} !== '' ? (
-                        <Typography key={key} variant='body1' component='div' align="left" sx={{mt:"16px"}}>
-                            {key} : {value}
-                        </Typography>
-                    ) : null)
-                })}
+                <Button variant="contained" fullWidth onClick={props.onEdit(indexUser,props.tmpUser)}>Submit</Button>
             </Box>
-            
         </Box>
     )
 }
