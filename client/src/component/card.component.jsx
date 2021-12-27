@@ -24,7 +24,6 @@ export const CardItem = (props) => {
             <Link to={`/edit/${props.data.id}`} style={{  textDecoration: 'none'}}>
                 <CardActions>
                     <Button size="small">
-                        
                         Edit
                     </Button>                    
                 </CardActions>

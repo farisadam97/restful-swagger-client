@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import {useParams} from 'react-router-dom'
+import {useParams,Link} from 'react-router-dom'
 
 
 const Edit = (props) => {
@@ -28,7 +28,6 @@ const Edit = (props) => {
                 mx:'auto'
             }}>
                 <TextField sx={{mb:"16px"}} id="username" fullWidth label="Username" variant="outlined"
-                defaultValue={dataUser.username}
                 onChange={(e)=>
                     {
                         props.setTmpUser({
@@ -37,6 +36,7 @@ const Edit = (props) => {
                         })
                     }
                 }
+                defaultValue={dataUser.username}
                 />
                 <TextField sx={{mb:"16px"}} id="email" fullWidth label="Email" variant="outlined"
                 onChange={(e)=>props.setTmpUser({
@@ -52,7 +52,9 @@ const Edit = (props) => {
                 })}
                 defaultValue={dataUser.password}
                 />
-                <Button variant="contained" fullWidth onClick={props.onEdit(indexUser,props.tmpUser)}>Submit</Button>
+                <Link to={`/`} style={{  textDecoration: 'none'}}>
+                    <Button variant="contained" fullWidth onClick={props.onEdit(indexUser,props.tmpUser)}>Submit</Button>
+                </Link>
             </Box>
         </Box>
     )

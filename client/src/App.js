@@ -45,7 +45,19 @@ const App = ()=>{
   }
 
   const onEdit = (indexUser,data) => (e) => {
-    console.log(indexUser,data)
+    let tempArr = [...user]
+    tempArr[indexUser] = {
+      ...tempArr[indexUser],
+      username : data.username,
+      email: data.email,
+      password : data.password
+    }
+    setUser(tempArr)
+    setTmpUser({
+      username : '',
+      email : '',
+      password : '',
+    })
   }
 
   return(
